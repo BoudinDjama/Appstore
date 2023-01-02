@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Appstore.Models.Category>
+
+<head>
+    <link rel="stylesheet" href="~/Content/Category.css">
+</head>
+@{
+    ViewBag.Title = "Category";
+}
+<div class="bootstrapiso">
+    <h2>Categories</h2>
+</div>
+<!--
+
+GRADIENT BANNER DESIGN BY SIMON LURWER ON DRIBBBLE:
+https://dribbble.com/shots/14101951-Banners
+
+-->
+   
+<div class="cards">
+    @foreach (var item in Model)
+    {
+
+        <h4 onclick="location.href='@Url.Action("CategoryView", "Categories", new { id = item.CategoryId })'">
+            <div class="card card-1">
+                <div class="card__icon"><i class="fas fa-bolt"></i></div>
+                <p class="card__exit"><i class="fas fa-times"></i></p>
+                <h2 class="card__title">@Html.DisplayFor(modelItem => item.Name)</h2>
+                <p class="card__apply">
+                    <a class="card__link" href="#">@Html.DisplayFor(modelItem => item.Description) <i class="fas fa-arrow-right"></i></a>
+                </p>
+            </div>
+            </h4>
+            }
+    </div>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Appstore.Models.App>
+
+<head>
+    <link rel="stylesheet" href="~/Content/AppsStyle.css">
+    <link rel="stylesheet" href="~/Content/Category.css">
+</head>
+@{
+    ViewBag.Title = "Today";
+}
+<h2>@ViewBag.Title</h2>
+<h2 class="App-Date-Today">@DateTime.Now.DayOfWeek, @String.Format("{0:MMMM}", DateTime.Now) @DateTime.Now.Day</h2>
+<h3>@ViewBag.Message</h3>
+<h4>Latest Apps</h4>
+@foreach (var item in Model)
+{
+
+
+    if (item.Id % 4 != 0)
+    {
+
+        <h4 onclick="location.href='@Url.Action("AppDetails", "Applications", new { id = item.Id })'">
+
+            <div class="App-wrapper App-float">
+                <img class="App-Image" src=" @Html.DisplayFor(modelItem => item.ImagePath)">
+                <div class="App-categorie-date">@Html.DisplayFor(modelItem => item.Category.Name)</div>
+
+                <div class="App-Name"> @Html.DisplayFor(modelItem => item.Name)</div>
+                <div class="App-Description App-Price-Description">@Html.DisplayFor(modelItem => item.Description)</div>
+                <div class="App-Price App-Price-Description">@Html.DisplayFor(modelItem => item.Price)$</div>
+
+
+            </div>
+
+        </h4>
+    }
+    else if (item.Id % 4 == 0)
+    {
+        <h4 onclick="location.href='@Url.Action("AppDetails", "Applications", new { id = item.Id })'">
+
+            <div class="App-wrapper App-float">
+                <img class="App-Image" src=" @Html.DisplayFor(modelItem => item.ImagePath)">
+                <div class="App-categorie-date">@Html.DisplayFor(modelItem => item.Category.Name)</div>
+
+                <div class="App-Name"> @Html.DisplayFor(modelItem => item.Name)</div>
+                <div class="App-Description App-Price-Description">@Html.DisplayFor(modelItem => item.Description)</div>
+                <div class="App-Price App-Price-Description">@Html.DisplayFor(modelItem => item.Price)$</div>
+
+
+            </div>
+        </h4>
+
+    }
+}
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.ActionLink("View All", "Apps", "AppStore")
+
+    </p>
+}
+@{
+
+
+    <h4 class="Today-Best-App">Check This Category</h4>
+
+    <h4 onclick="location.href='@Url.Action("CategoryView", "Categories", new { id = @ViewBag.RndCategory.CategoryId })'">
+        <div class="card card-3">
+            <div class="card__icon"><i class="fas fa-bolt"></i></div>
+            <p class="card__exit"><i class="fas fa-times"></i></p>
+            <h2 class="card__title">@ViewBag.RndCategory.Name</h2>
+            <p class="card__apply">
+                <a class="card__link" href="#">@ViewBag.RndCategory.Description <i class="fas fa-arrow-right"></i></a>
+            </p>
+        </div>
+    </h4>
+
+
+}
