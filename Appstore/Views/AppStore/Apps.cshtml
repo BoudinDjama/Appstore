@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Appstore.Models.App>
+
+@{
+    ViewBag.Title = "Apps";
+}
+<head>
+    <link rel="stylesheet" href="..\Content\AppsStyle.css">
+</head>
+
+<h2 style="margin-top:15px;">Apps</h2>
+
+<br style="clear:left;">
+
+<div style="float:left; margin:5px; margin-top:40px;">
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.ActionLink("Create New", "NewApp", "Applications")
+        </p>
+    }
+
+</div>
+<div style="float:left; margin:5px; margin-top:40px;">
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.TextBox("filter")
+            <input class="btn" type="submit" value="Search" />
+        </p>
+    }
+</div>
+
+<div style="float:left; margin:5px; margin-top:40px;">
+    @using (Html.BeginForm())
+    {
+        <p>
+            <input class="btn" type="submit" value="See all" />
+        </p>
+    }
+</div>
+
+<br style="clear:left;">
+
+@foreach (var item in Model)
+{
+    if (item.Id % 4 != 0)
+    {
+        <h4 onclick="location.href='@Url.Action("AppDetails", "Applications", new { id = item.Id })'">
+
+
+            <div class="App-wrapper App-float">
+                <img class="App-Image" src=" @Html.DisplayFor(modelItem => item.ImagePath)">
+                <div class="App-categorie-date">@Html.DisplayFor(modelItem => item.Category.Name)</div>
+
+                <div class="App-Name"> @Html.DisplayFor(modelItem => item.Name)</div>
+                <div class="App-Description App-Price-Description">@Html.DisplayFor(modelItem => item.Description)</div>
+                <div class="App-Price App-Price-Description">@Html.DisplayFor(modelItem => item.Price)$</div>
+
+
+            </div>
+
+        </h4>
+    }
+    else if (item.Id % 4 == 0)
+    {
+    <h4 onclick="location.href='@Url.Action("AppDetails", "Applications", new { id = item.Id })'">
+
+
+    <div class="App-wrapper App-float">
+        <img class="App-Image" src=" @Html.DisplayFor(modelItem => item.ImagePath)">
+        <div class="App-categorie-date">@Html.DisplayFor(modelItem => item.Category.Name)</div>
+
+        <div class="App-Name"> @Html.DisplayFor(modelItem => item.Name)</div>
+        <div class="App-Description App-Price-Description">@Html.DisplayFor(modelItem => item.Description)</div>
+        <div class="App-Price App-Price-Description">@Html.DisplayFor(modelItem => item.Price)$</div>
+
+
+    </div>
+
+    </h4>
+
+    }
+}
+
+
+<div class="App-Today-wrapper ">
+    <div class="Today-categorie-date" style="text-align:center"></div>
+
+
+    <div class="Today-Name"></div>
+    <div class="Today-Description App-Price-Description"></div>
+    <div class="Today-Price App-Price-Description"></div>
+</div>

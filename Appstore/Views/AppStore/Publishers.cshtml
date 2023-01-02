@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Appstore.Models.Dev>
+
+@{
+    ViewBag.Title = "Publishers";
+}
+
+<h2>Publishers</h2>
+<p></p>
+<div style="float:left; margin:5px;">
+    @using (Html.BeginForm())
+    {
+    <p>
+        @Html.ActionLink("Create New","Create", "Publishers")
+    </p>
+    }
+
+</div>
+<div style="float:left; margin:5px; ">
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.TextBox("filter")
+            <input class="btn" type="submit" value="Search" />
+        </p>
+    }
+</div>
+
+<div style="float:left; margin:5px; ">
+    @using (Html.BeginForm())
+    {
+        <p>
+            <input class="btn" type="submit" value="See all" />
+        </p>
+    }
+</div>
+
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr style="color:white; background-color:black; ">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td style="align-content:center;">
+                <button style="background-color:darkblue;color:white;border-radius:8px;"
+                        onclick="location.href='@Url.Action("Edit", "Publishers", new { id = item.Id })'">
+                    Edit
+                </button>
+                <button style="background-color:black;color:white;border-radius:8px;"
+                        onclick="location.href='@Url.Action("Details", "Publishers", new { id = item.Id })'">
+                    Details
+                </button>
+                <button style="background-color:darkred;color:white;border-radius:8px;"
+                        onclick="location.href='@Url.Action("Delete", "Publishers", new { id = item.Id })'">
+                    Delete
+                </button>
+
+            </td>
+        </tr>
+    }
+
+</table>
