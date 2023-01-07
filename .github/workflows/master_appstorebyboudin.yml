@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'AppstoreByBoudin'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F98CA3C4436447BD8CBFD2EC20AE9C1D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0ADCD448180A44859E3F52FE2D3D2EA8 }}
           package: .
